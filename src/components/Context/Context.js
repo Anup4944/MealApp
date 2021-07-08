@@ -11,11 +11,14 @@ export const AppContext = ({ children }) => {
   const fetchHomePageMeals = useCallback((searchTerm) => {
     axios
       .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`)
-      .then((res) => console.log(res.data));
+      .then((res) => {
+        console.log(res.data.meals);
+        setMeals(res.data.meals);
+      });
   }, []);
 
   return (
-    <myContext.Provider value={{ fetchHomePageMeals }}>
+    <myContext.Provider value={{ fetchHomePageMeals,meals }}>
       {children}
     </myContext.Provider>
   );
