@@ -1,0 +1,31 @@
+.categories {
+  background: #000;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80vh;
+
+  div{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+
+  img {
+    width: 110px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    transition: all 0.4s ease;
+    border-radius: 10px;
+
+    &:hover {
+      transform: scale(1.5);
+    }
+   
+  }
+}
