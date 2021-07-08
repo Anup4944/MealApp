@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useContext, useState, useCallback } from "react";
+import "./HomePage.scss";
+import { myContext } from "../Context/Context";
 
 const HomePage = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+  const [searchTerm, setSearchTerm] = useState("");
+  const { fetchHomePageMeals } = useContext(myContext);
 
-export default HomePage
+  const fetchMealsHandler = useCallback(() => {
+    fetchHomePageMeals(searchTerm);
+  }, [searchTerm, fetchHomePageMeals ]);
+
+  return (
+    <div className="home">
+      <div className="home-search">
+        <input
+          type="text"
+          placeholder="Search for meal..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={fetchMealsHandler}>Search Meal</button>
+      </div>
+
+      <div className="home-meals"></div>
+    </div>
+  );
+};
+
+export default HomePage;

@@ -1,10 +1,22 @@
-import React, {createContext} from 'react'
+import React, { createContext, useCallback, useState } from "react";
+import axios from "axios";
 
-const myContext = createContext();
+export const myContext = createContext();
 
+export const AppContext = ({ children }) => {
+  const [meals, setMeals] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [randomMeal, setRandomMeal] = useState([]);
 
-export const AppContext = ({children}) =>{
-    return(
-        <myContext.Provider>{children}</myContext.Provider>
-    )
-}
+  const fetchHomePageMeals = useCallback((searchTerm) => {
+    axios
+      .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`)
+      .then((res) => console.log(res.data));
+  }, []);
+
+  return (
+    <myContext.Provider value={{ fetchHomePageMeals }}>
+      {children}
+    </myContext.Provider>
+  );
+};
