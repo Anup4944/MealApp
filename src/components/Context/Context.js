@@ -12,30 +12,37 @@ export const AppContext = ({ children }) => {
     axios
       .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`)
       .then((res) => {
-        console.log(res.data.meals);
         setMeals(res.data.meals);
       });
   }, []);
 
-  const fetchCategories = useCallback(() =>{
-    axios.get(`https://www.themealdb.com/api/json/v1/1/categories.php`)
-    .then((res) => {
-      console.log(res.data.categories)
-      setCategories(res.data.categories)
-    })
-  },[])
+  const fetchCategories = useCallback(() => {
+    axios
+      .get(`https://www.themealdb.com/api/json/v1/1/categories.php`)
+      .then((res) => {
+        setCategories(res.data.categories);
+      });
+  }, []);
 
-
-  const fetchRandomMeal = useCallback(() =>{
-    axios.get(`https://www.themealdb.com/api/json/v1/1/random.php`)
-    .then((res) => {
-      console.log(res.data.meals)
-      setRandomMeal(res.data.meals)
-    })
-  },[])
+  const fetchRandomMeal = useCallback(() => {
+    axios
+      .get(`https://www.themealdb.com/api/json/v1/1/random.php`)
+      .then((res) => {
+        setRandomMeal(res.data.meals);
+      });
+  }, []);
 
   return (
-    <myContext.Provider value={{ fetchHomePageMeals,meals,fetchCategories,categories, fetchRandomMeal,randomMeal}}>
+    <myContext.Provider
+      value={{
+        fetchHomePageMeals,
+        meals,
+        fetchCategories,
+        categories,
+        fetchRandomMeal,
+        randomMeal,
+      }}
+    >
       {children}
     </myContext.Provider>
   );
